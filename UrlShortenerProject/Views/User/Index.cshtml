@@ -1,0 +1,476 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<!-- daterange picker -->
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <!-- /.card -->
+        <!-- general form elements -->
+        <!-- /.card -->
+        <!-- /.card -->
+        <!-- Horizontal Form -->
+        <div class="card card-dark">
+            <div class="card-header d-flex justify-content-center">
+                <h3 class="card-title">Link Oluştur</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="long" name="longUrl" placeholder="Uzun Bağlantı">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="desc" name="desc" placeholder="Açıklama">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="tag" name="tag" placeholder="Etiket">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="ek" name="spe" placeholder="Alan Adına Ekleme Yapın (İsteğe bağlı)">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="pass" name="pass" placeholder="Şifre (İsteğe bağlı)">
+                        </div>
+                    </div>
+
+                    <!-- Date and time -->
+                    <div class="form-group">
+                        <label>Son Kullanma Tarihi ve Saati</label>
+                        <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" id="datePickerTime" name="lastDate" data-target="#reservationdatetime" />
+                            <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.form group -->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button onclick="shortUrlClick()" class="btn btn-primary mb-2" style="width: 125px; height:50px;">Kısalt</button>
+                    @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+        <!-- /.card -->
+
+    </div>
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <!-- /.card -->
+        <!-- general form elements -->
+        <!-- /.card -->
+        <!-- /.card -->
+        <!-- Horizontal Form -->
+        <div class="card card-info">
+
+            <div class="card-header d-flex justify-content-center">
+                <h3 class="card-title">Son Kısaltılan 5 Link</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+                <div class="card-body">
+                    @{
+                        int i = 0;
+
+                        foreach (var item in @ViewBag.ShortenedUrlCollection)
+                        {
+                            if (i < 5)
+                            {
+                                <div class="card card-info card-outline">
+                                    <div class="card-header">
+                                        <h5 class="card-title">@item.OriginalUrl</h5>
+
+                                        <div class="card-tools">
+                                            <a href="@item.ShortUrl" target="_blank" class="btn btn-tool btn-link">(Kısa Adrese Git)</a>
+                                            <a href="@Url.Action("Index","QR",new{shortUrl=@item.ShortUrl })" target="blank" class="btn btn-tool btn-link">(QR Oluştur - Linki Görüntüle)</a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                i++;
+                            }
+
+                        }
+                    }
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+        <!-- /.card -->
+
+    </div>
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <!-- /.card -->
+        <!-- general form elements -->
+        <!-- /.card -->
+        <!-- /.card -->
+        <!-- Horizontal Form -->
+        <div class="card card-warning">
+
+            <div class="card-header d-flex justify-content-center">
+                <h3 class="card-title">Kullanıcı İsmi</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+                <div class="card-body">
+                    <div class="card card-info card-outline">
+                        <div class="card-header">
+                            <h5 class="card-title"><i class="fab fa-think-peaks"></i> Toplam Kısaltılmış URL <a href="#" class="btn btn-tool btn-link">(@ViewBag.totalLink)</a></h5>
+
+
+                        </div>
+
+                    </div>
+                    <div class="card card-info card-outline">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <i class="fas fa-link"></i> Toplam Tıklama  <a href="#" class="btn btn-tool btn-link">(@ViewBag.totalClick)</a>
+                            </h5>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                </div>
+                <!-- /.card-footer -->
+            </form>
+        </div>
+        <!-- /.card -->
+
+    </div>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Linkleri Yönet</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Orjinial Link</th>
+                            <th>Kısa Link</th>
+                            <th>Açıklaması</th>
+                            <th>Etiket</th>
+                            <th>Özelleştirilen Link</th>
+                            <th>Parolası</th>
+                            <th>Tıklanma Sayısı</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>Son Kullanma Tarihi</th>
+                            <th>Oluşturan Kişi</th>
+                            <th>Status</th>
+                            <th>Güncelleme Yap</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in @ViewBag.ShortenedUrlCollection)
+                        {
+                            <tr>
+                                <td>@item.OriginalUrl</td>
+                                <td>@item.ShortUrl</td>
+                                <td>@item.Description</td>
+                                <td>@item.Tag</td>
+                                <td>@item.SpecificLink</td>
+                                <td>@item.Password</td>
+                                <td>@item.ClickCount</td>
+                                <td>@item.CreatedAt</td>
+                                <td>@item.LastDate</td>
+                                <td>@item.kAdi</td>
+                                <td>@item.Status</td>
+                                <td>
+                                   
+                                    @*id ekleme bakılacak aşağıya*@
+                                    <button class="btn btn-danger my-1" onclick="changeStatus('@item.Tag')">Statüsünü Güncelle</button>
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <!--/.col (left) -->
+    <!-- right column -->
+    <!--/.col (right) -->
+</div>
+
+<!-- jQuery -->
+@section script{
+<script src="~/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="~/AdminLTE-3.2.0/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="~/AdminLTE-3.2.0/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="~/AdminLTE-3.2.0/plugins/moment/moment.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<!-- bootstrap color picker -->
+<script src="~/AdminLTE-3.2.0/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/AdminLTE-3.2.0/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="~/AdminLTE-3.2.0/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="~/AdminLTE-3.2.0/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="~/AdminLTE-3.2.0/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/AdminLTE-3.2.0/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/AdminLTE-3.2.0/dist/js/demo.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/jszip/jszip.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- Page specific script -->
+<script>
+    $(function () {
+
+    });
+</script>
+<script>
+
+    $(function () {
+        
+         $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+      order: [[7, 'asc']],
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+        console.log("saddasds");
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+
+      //Datemask dd/mm/yyyy
+      $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+      //Datemask2 mm/dd/yyyy
+      $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+      //Money Euro
+      $('[data-mask]').inputmask()
+
+      //Date picker
+      $('#reservationdate').datetimepicker({
+          format: 'L'
+      });
+
+      //Date and time picker
+      $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+      //Date range picker
+      $('#reservation').daterangepicker()
+      //Date range picker with time picker
+      $('#reservationtime').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+          format: 'MM/DD/YYYY hh:mm A'
+        }
+      })
+      //Date range as a button
+      $('#daterange-btn').daterangepicker(
+        {
+          ranges   : {
+            'Today'       : [moment(), moment()],
+            'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+            'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate  : moment()
+        },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        }
+      )
+
+      //Timepicker
+      $('#timepicker').datetimepicker({
+        format: 'LT'
+      })
+
+
+
+
+      //Bootstrap Duallistbox
+      $('.duallistbox').bootstrapDualListbox()
+
+      //Colorpicker
+      $('.my-colorpicker1').colorpicker()
+      //color picker with addon
+      $('.my-colorpicker2').colorpicker()
+
+      $('.my-colorpicker2').on('colorpickerChange', function(event) {
+        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+      })
+
+      $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      })
+
+    })
+    // BS-Stepper Init
+    document.addEventListener('DOMContentLoaded', function () {
+      window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+    })
+
+    // DropzoneJS Demo Code Start
+    Dropzone.autoDiscover = false
+
+    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+    var previewNode = document.querySelector("#template")
+    previewNode.id = ""
+    var previewTemplate = previewNode.parentNode.innerHTML
+    previewNode.parentNode.removeChild(previewNode)
+
+    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+      url: "/target-url", // Set the url
+      thumbnailWidth: 80,
+      thumbnailHeight: 80,
+      parallelUploads: 20,
+      previewTemplate: previewTemplate,
+      autoQueue: false, // Make sure the files aren't queued until manually added
+      previewsContainer: "#previews", // Define the container to display the previews
+      clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+    })
+
+    myDropzone.on("addedfile", function(file) {
+      // Hookup the start button
+      file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+    })
+
+    // Update the total progress bar
+    myDropzone.on("totaluploadprogress", function(progress) {
+      document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+    })
+
+    myDropzone.on("sending", function(file) {
+      // Show the total progress bar when upload starts
+      document.querySelector("#total-progress").style.opacity = "1"
+      // And disable the start button
+      file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+    })
+
+    // Hide the total progress bar when nothing's uploading anymore
+    myDropzone.on("queuecomplete", function(progress) {
+      document.querySelector("#total-progress").style.opacity = "0"
+    })
+
+    // Setup the buttons for all transfers
+    // The "add files" button doesn't need to be setup because the config
+    // `clickable` has already been specified.
+    document.querySelector("#actions .start").onclick = function() {
+      myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+    }
+    document.querySelector("#actions .cancel").onclick = function() {
+      myDropzone.removeAllFiles(true)
+    }
+    // DropzoneJS Demo Code End
+
+    function shortUrlClick() {
+
+            $.ajax({
+                url: '@Url.Action("CreateShortUrl","User")',
+                dataType: 'Json',
+                type: "POST",
+                data: {
+                    longUrl: $("#long").val(),
+                     desc:$("#desc").val() ,
+                     pass:$("#pass").val(),
+                     spe:$("#ek").val(),
+                     tag:$("#tag").val(),
+                     lastDate:$("#datePickerTime").val()
+                },
+                success: function () {
+                    location.href='@Url.Action("Index","User")';
+                    consolo.log("asdas");
+                },
+                error: function (error) {
+                    alert("Yapabileceğiniz maksimum kısaltma sayısına ulaştınız. Daha fazla url kısaltmak isterseniz lütfen üye olun.");
+                }
+
+            });
+
+
+        }
+
+        function changeStatus(tag_){
+              $.ajax({
+                url: '@Url.Action("ChangeStatus","User")',
+                dataType: 'html',
+                method: "POST",
+                data: {
+                    tag:tag_
+                },
+                success: function () {
+                    location.href='@Url.Action("Index","User")';
+                    consolo.log("asdas");
+                },
+                error: function (error) {
+                    alert("Hata!!!");
+                }
+
+            });
+        }
+</script>
+        }

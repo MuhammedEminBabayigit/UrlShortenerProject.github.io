@@ -1,0 +1,646 @@
+﻿@model UrlShortenerProject.Models.ShortenedUrl
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+@*
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Link Kısaltma Hizmeti</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="~/ogistic/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="~/ogistic/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="~/ogistic/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="~/ogistic/images/fevicon.png" type="~/ogistic/image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="~/ogistic/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+<body class="main-layout">
+    <!-- loader  -->
+    @* <div class="loader_bg">
+    <div class="loader"><img src="~/ogistic/images/loading.gif" alt="#" /></div>
+    </div>*@
+    <!-- end loader -->
+    <!-- <div id="mySidepanel" class="sidepanel">
+       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+       <a href="index.html">Home </a>
+       <a href="#about">About</a>
+       <a href="#service">Services  </a>
+       <a href="#vehicles">Our Vehicles</a>
+       <a href="#testimonial">Testimonial</a>
+       <a href="#contact">Contact</a>
+    </div> -->
+    <!-- header -->
+    <header>
+        <!-- header inner -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <div class="logo">
+                            <a href="~/ogistic/index.html"><img src="~/ogistic/images/logo2.1.png" alt="#" /></a>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7">
+                        <div class="left_button" style="margin-top:15px">
+                            <ul class="conat_info d_none ">
+                                <li><a href="#about"><p style="color: black; font-size: 20px;">Niçin Biz?</p></a></li>
+                                <li><a href="#service"><p style="color: black; font-size: 20px;">Hizmetlerimiz</p></a></li>
+                                <li><a href="@Url.Action("Register","Access")"><p style="color: black; font-size: 20px;">Bize Katılın</p></a></li>
+                                <li><a href="#testimonial"><p style="color: black; font-size: 20px;">Bir Link Kısaltarak Başlayın</p></a></li>
+                                <!-- <input id="search-input" type="search" id="form1" class="form-control" style="width:200px" /> -->
+                                <!-- <br> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="right_bottun">
+                            <ul class="conat_info d_none ">
+                                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                <li><a href="@Url.Action("Register","Access")"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                                <li><a href="@Url.Action("Register","Access")"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+                                <p style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ara&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Üye Ol &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Giriş Yap</p>
+                            </ul>
+                            <!-- <button class="openbtn" onclick="openNav()"><img src="images/menu_icon.png" alt="#"/> </button>  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header inner -->
+    <!-- end header -->
+    <!-- banner -->
+    <section class="banner_main">
+        <div id="banner1" class="carousel slide banner_slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#banner1" data-slide-to="0" class="active"></li>
+                <li data-target="#banner1" data-slide-to="1"></li>
+                <li data-target="#banner1" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container-fluid">
+                        <div class="carousel-caption">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-5">
+                                    <div class="text-bg">
+                                        <h1>Kısa Link Hizmeti</h1>
+                                        <span>İsterseniz link isterseniz QR veya daha farklı hizmetler...</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-7">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="ban_track">
+                                                <figure><img src="~/ogistic/images/link-g9a9d52a62_1280.2.png" alt="#" /></figure>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-6">
+                                           <form class="transfot">
+                                              <div class="col-md-12">
+                                                 <span>Professional Services</span>
+                                                 <h3>Get your transport quote</h3>
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Location" type="text" name="Location">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="To destination" type="text" name="To destination">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Email" type="text" name="Email">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Contact Number" type="text" name="Contact Number">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <button class="get_now">Get Now quote</button>
+                                              </div>
+                                           </form>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="carousel-item">
+                    <div class="container-fluid">
+                        <div class="carousel-caption">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-5">
+                                    <div class="text-bg">
+                                        <h1>Milyonlarca Kullancı</h1>
+                                        <span>Gün İçerisinde milyonlarca kullanıcı sitemizi ziyaret etmektedir. Sizi de üye bekleriz</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-7">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="ban_track">
+                                                <figure><img src="~/ogistic/images/cartoon-g7f957b20d_1920.2.png" alt="#" /></figure>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-6">
+                                           <form class="transfot">
+                                              <div class="col-md-12">
+                                                 <span>Professional Services</span>
+                                                 <h3>Get your transport quote</h3>
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Location" type="text" name="Location">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="To destination" type="text" name="To destination">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Email" type="text" name="Email">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Contact Number" type="text" name="Contact Number">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <button class="get_now">Get Now quote</button>
+                                              </div>
+                                           </form>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="carousel-item">
+                    <div class="container-fluid">
+                        <div class="carousel-caption">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-5">
+                                    <div class="text-bg">
+                                        <h1>Link Kısa Hizmet Uzun</h1>
+                                        <span>Uzun ve anlaşılmaz bağlantıları kişiselleştirin ve tıklanma performanslarını takip edin.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-7">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="ban_track">
+                                                <figure><img src="~/ogistic/images/qr-code-g6d31367d5_1280.4.png" alt="#" /></figure>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-6">
+                                           <form class="transfot">
+                                              <div class="col-md-12">
+                                                 <span>Professional Services</span>
+                                                 <h3>Get your transport quote</h3>
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Location" type="text" name="Location">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="To destination" type="text" name="To destination">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Email" type="text" name="Email">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <input class="transfot_form" placeholder="Contact Number" type="text" name="Contact Number">
+                                              </div>
+                                              <div class="col-md-12">
+                                                 <button class="get_now">Get Now quote</button>
+                                              </div>
+                                           </form>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+            @*<a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+            <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>*@
+        </div>
+    </section>
+    <!-- end banner -->
+    <!-- about section -->
+    <div id="about" class="about ">
+        <div class="container">
+            <div class="row d_flex">
+                <div class="col-md-6">
+                    <div class="about_right">
+                        <figure><img src="~/ogistic/images/about.png" alt="#" /></figure>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="titlepage">
+                        <h2>Hakkımızda</h2>
+                        <p>
+                            Uzun, karmaşık, ve sıradan linklerden kurtulmak amacıyla çıktığımız bu yolda her geçen gün büyüyerek daha da fazla kısa linkler oluşturuyoruz. <br>
+                            Çalınması kolay, tahmin edilebilir linklerin verdiği güvenlik zafiyetine karşı olarak başlattığımız bu harekette siz de bize destek olun.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about section -->
+    <!-- service section -->
+    <div id="service" class="service">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="titlepage">
+                        <h2>Hizmetlerimiz</h2>
+                        <p>Kısaltmak istediğiniz linkleri özelleştirebilir, QR kod haline getirebilir ve sürelendirebilirsiniz. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="service_main">
+                        <div class="service_box blu_colo">
+                            <i><img src="~/ogistic/images/qr-code-g7ef4570f6_1280.4.png" alt="#" /></i>
+                            <h4>QR Koduyla Mobil Erişim</h4>
+                        </div>
+                        <div class="service_box yelldark_colo">
+                            <i><img src="~/ogistic/images/link-g0da702f0a_1280.5.png" alt="#" /></i>
+                            <h4>Linklerinizi Çoğaltın</h4>
+                        </div>
+                        <div class="service_box yell_colo">
+                            <i><img src="~/ogistic/images/hourglass-gf8da82124_1920.1.png" alt="#" /></i>
+                            <h4>Ne Zaman İsterseniz O Zaman Aktif</h4>
+                        </div>
+                        <div class="service_box yelldark_colo">
+                            <i><img src="~/ogistic/images/characters-g4ecd596a5_1920.1.jpg" alt="#" /></i>
+                            <h4>Özel Link Oluşturun</h4>
+                        </div>
+                        <div class="service_box yell_colo">
+                            <i><img src="~/ogistic/images/ser5.png" alt="#" /></i>
+                            <h4>100% Güvenli</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end service section -->
+    <!-- vehicles section -->
+    <!-- <section id="vehicles" class="vehicles">
+       <div class="container">
+          <div class="row">
+             <div class="col-md-12">
+                <div class="titlepage">
+                   <h2>Our Vehicles</h2>
+                   <p>nternet. It uses a dictionary of over 200 Latin words, combined with .</p>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div id="veh" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+             <li data-target="#veh" data-slide-to="0" class="active"></li>
+             <li data-target="#veh" data-slide-to="1"></li>
+             <li data-target="#veh" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+             <div class="carousel-item active">
+                <div class="container">
+                   <div class="carousel-caption">
+                      <div class="row">
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc1.png" alt="#"/></figure>
+                            </div>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc2.png" alt="#"/></figure>
+                            </div>
+                            <h3 class="blac_co">Truck</h3>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc3.png" alt="#"/></figure>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="carousel-item">
+                <div class="container">
+                   <div class="carousel-caption">
+                      <div class="row">
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc1.png" alt="#"/></figure>
+                            </div>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc2.png" alt="#"/></figure>
+                            </div>
+                            <h3 class="blac_co">Truck</h3>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc3.png" alt="#"/></figure>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="carousel-item">
+                <div class="container">
+                   <div class="carousel-caption">
+                      <div class="row">
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc1.png" alt="#"/></figure>
+                            </div>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc2.png" alt="#"/></figure>
+                            </div>
+                            <h3 class="blac_co">Truck</h3>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="vehicles_truck">
+                               <figure><img src="images/truc3.png" alt="#"/></figure>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <a class="carousel-control-prev" href="#veh" role="button" data-slide="prev">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          </a>
+          <a class="carousel-control-next" href="#veh" role="button" data-slide="next">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </a>
+       </div>
+       <div class="container">
+          <div class="row">
+             <div class="col-md-12">
+                <a class="read_more" href="#">Read More</a>
+             </div>
+          </div>
+       </div>
+    </section> -->
+    <!-- end vehicles section -->
+    <!-- testimonial section -->
+    <div id="testimonial" class="testimonial bottom_cross bottom_cross2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Bir Link Kısaltın</h2>
+                        <p>Üye olmadan da link kısaltabilirsiniz. Ama bu sadece tek seferlik olabilir</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="myCarousel" class="carousel slide testimonial_Carousel " data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="container">
+                                    <div class="carousel-caption ">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="testimonial_box">
+                                                    <div style="text-align: center;">
+                                                        <div class="form-group row">
+                                                            <!-- <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">URL</label> -->
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Kısaltılacak Link" name="longUrl" value="@Model.OriginalUrl">
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <button onclick="shortUrlClick()" class="btn btn-primary mb-2" style="width: 125px; height:50px;">Kısalt</button>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <input type="text" disabled class="form-control form-control-lg" id="myInput" name="ShortedUrl" value="@Model.ShortUrl" style="width: 500px">
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <input type="button" onclick="myFunction()" class="btn btn-primary mb-2" style="width: 125px; height:50px; background-color: aqua;" value="Kopyala" />
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <input type="button" onclick="inputClear()" class="btn btn-primary mb-2" style="width: 125px; height:50px; background-color: darkorange;" value="Temizle" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end testimonial section -->
+    <!-- choose section -->
+    <!-- <div class="choose">
+       <div class="container">
+          <div class="row">
+             <div class="col-md-12">
+                <div class="titlepage">
+                   <h2>Why Choose Us</h2>
+                </div>
+             </div>
+          </div>
+          <div class="row">
+             <div class="col-md-5">
+                <div class="choose_box">
+                   <i><img src="images/why1.png" alt="#"/></i>
+                   <h3>Our Vission</h3>
+                   <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</p>
+                   <a class="read_more" href="#">Read More</a>
+                </div>
+             </div>
+             <div class="col-md-5 offset-md-2">
+                <div class="choose_box">
+                   <i><img src="images/why2.png" alt="#"/></i>
+                   <h3>Estimate Shipping</h3>
+                   <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</p>
+                   <a class="read_more" href="#">Read More</a>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div> -->
+    <div class="choose">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Sayılarla İstatistiklerimiz</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="choose_box">
+                        <h3>563</h3>
+                        <h3>122</h3>
+                        <h3>8492</h3>
+                        <h3>92948</h3>
+                        <h3>123</h3>
+                    </div>
+                </div>
+                <div class="col-md-9 offset-md-1">
+                    <div class="choose_box">
+                        <br><br>
+                        <h2>Bu ay aramıza katılan yeni üyelerimiz</h2><br><br>
+                        <h2>Sistemde aktif üye sayımız</h2><br><br>
+                        <h2>Toplam Üye Sayımız</h2><br><br>
+                        <h2>Toplam kısalttığımız bağlantı</h2><br><br>
+                        <h2>Bugün kısalttığımız bağlantı</h2><br>
+                        <!-- <p>Bu ay aramıza katılan yeni üyelerimiz</p><br>
+                        <p>Sistemde aktif üye sayımız</p><br>
+                        <p>Toplam Üye Sayımız</p><br>
+                        <p>Toplam kısalttığımız bağlantı</p><br>
+                        <p>Bugün kısalttığımız bağlantı</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end choose section -->
+    <!--  footer -->
+    <footer>
+        <div class="footer bottom_cross1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <ul class="location_icon">
+                            <li>
+                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Addres : Kocaeli Üniversitesi <br> Teknoloji Fakültesi
+                            </li>
+                            <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>Destek :  +(1234) 567 890</li>
+                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>Email : ermh@ermh.com</li>
+                        </ul>
+                        <form class="bottom_form">
+                            <h3>Haber Bülteni</h3>
+                            <input class="enter" placeholder="Email Adresiniz" type="text" name="Enter your email">
+                            <button class="sub_btn">Abone Ol</button>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="map">
+                            <figure><img src="~/ogistic/images/map.png" alt="#" /></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>© 2022 Tüm Hakları Saklıdır</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
+
+    @*<script src="js/jquery.min.js"></script>*@
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    @*<script src="js/jquery-3.0.0.min.js"></script>*@
+    <!-- sidebar -->
+    @*<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>*@
+    <script src="js/custom.js"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+    </script>
+    <script>
+       
+        function myFunction() {
+            var copyText = document.getElementById("myInput");
+
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+
+            navigator.clipboard.writeText(copyText.value);
+
+            //alert("Link Kopyalandı: " + copyText.value);
+        }
+        function inputClear() {
+            $("#colFormLabelLg").val("");
+            $('#myInput').val("");
+        }
+        function shortUrlClick() {
+
+            $.ajax({
+                url: "Home/CreateShortUrl/",
+                dataType: 'Json',
+                type: "POST",
+                data: {
+                    longUrl: $("#colFormLabelLg").val(),
+                },
+                success: function (data) {
+                    $('#myInput').val(data["shortUrl"]);
+                },
+                error: function (error) {
+                    alert("Yapabileceğiniz maksimum kısaltma sayısına ulaştınız. Daha fazla url kısaltmak isterseniz lütfen üye olun.");
+                }
+
+            });
+
+
+        }
+
+    </script>
+</body>
+</html>
